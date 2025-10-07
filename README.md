@@ -9,16 +9,17 @@ A command-line tool that generates SVG images from natural language descriptions
 
 To get started run the tool using npx:
 
-```
-npx svgnew-saul
+```bash
+npx svg-saul
 ```
 
 
 ### Interactive Mode
 
 Simply run:
+
 ```bash
-npx svgnew-saul
+npx svg-saul
 ```
 
 You'll be prompted to:

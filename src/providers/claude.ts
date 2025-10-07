@@ -6,25 +6,29 @@ import { getConfig } from '../config.js';
  * Claude (Anthropic) LLM Provider implementation
  */
 export class ClaudeProvider implements LLMProvider {
-  private client: Anthropic;
-  private model: string;
-  private maxTokens: number;
+  private client: Anthropic | null = null;
+  private model: string = '';
+  private maxTokens: number = 0;
 
-  constructor() {
-    const config = getConfig();
-    this.client = new Anthropic({ apiKey: config.apiKey });
-    this.model = config.model;
-    this.maxTokens = config.maxTokens;
+  private async ensureInitialized(): Promise<void> {
+    if (!this.client) {
+      const config = await getConfig();
+      this.client = new Anthropic({ apiKey: config.apiKey });
+      this.model = config.model;
+      this.maxTokens = config.maxTokens;
+    }
   }
 
   async *streamCompletion(messages: LLMMessage[]): AsyncIterable<StreamEvent> {
+    await this.ensureInitialized();
+
     // Convert our generic message format to Claude's format
     const anthropicMessages = messages.map(msg => ({
       role: msg.role,
       content: msg.content
     }));
 
-    const stream = await this.client.messages.create({
+    const stream = await this.client!.messages.create({
       model: this.model,
       max_tokens: this.maxTokens,
       stream: true,
