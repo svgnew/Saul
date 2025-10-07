@@ -66,8 +66,9 @@ export async function main(): Promise<void> {
   // Initialize config (prompt for API key if needed) before showing spinner
   await getConfig();
 
+  const s = clack.spinner();
+
   try {
-    const s = clack.spinner();
     const { svg, filename } = await generateSVG(description, s);
 
     s.message('Saving file...');
