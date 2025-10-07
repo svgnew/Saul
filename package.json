@@ -1,6 +1,6 @@
 {
   "name": "svg-saul",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "SVG generator agent",
   "main": "dist/index.js",
   "type": "module",
