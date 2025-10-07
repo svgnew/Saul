@@ -6,6 +6,7 @@ import { stdin, stdout } from 'process';
 import { generateSVG } from './svg-generator.js';
 import { saveFiles } from './file-handler.js';
 import { showMenu } from './menu.js';
+import { getConfig } from './config.js';
 
 const isTTY = stdin.isTTY;
 
@@ -62,10 +63,11 @@ export async function main(): Promise<void> {
     process.exit(1);
   }
 
-  const s = clack.spinner();
-  s.start('Generating SVG...');
+  // Initialize config (prompt for API key if needed) before showing spinner
+  await getConfig();
 
   try {
+    const s = clack.spinner();
     const { svg, filename } = await generateSVG(description, s);
 
     s.message('Saving file...');

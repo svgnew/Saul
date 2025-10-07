@@ -29,8 +29,12 @@ function formatProgress(startTime: number, tokenCount: number, label = 'Generati
  * @param spinner - Optional spinner to update with progress
  * @returns SVG markup and suggested filename
  */
-export async function generateSVG(description: string, spinner?: { message: (msg: string) => void }): Promise<GenerateSVGResult> {
+export async function generateSVG(description: string, spinner?: { message: (msg: string) => void; start: (msg: string) => void }): Promise<GenerateSVGResult> {
   const provider = getLLMProvider();
+
+  if (spinner) {
+    spinner.start('Generating SVG...');
+  }
 
   const messages: LLMMessage[] = [
     {
@@ -100,7 +104,7 @@ SVG:`,
     }
   }
 
-  console.log(`\x1b[2mFilename: ${filenameOutputTokens} tokens · ${provider.calculateCost(filenameInputTokens, filenameOutputTokens)}\x1b[0m`);
+  console.log(` \x1b[2m${filenameOutputTokens} tokens · ${provider.calculateCost(filenameInputTokens, filenameOutputTokens)}\x1b[0m`);
 
   const filename = sanitizeFilename(filenameText);
 
@@ -119,7 +123,7 @@ export async function modifySVG(
   currentSVG: string,
   pngBuffer: Buffer,
   modificationPrompt: string,
-  spinner?: { message: (msg: string) => void }
+  spinner?: { message: (msg: string) => void; start: (msg: string) => void }
 ): Promise<string> {
   const provider = getLLMProvider();
   const base64Image = pngBuffer.toString('base64');
@@ -196,7 +200,7 @@ Modified SVG:`,
 export async function autoImproveSVG(
   currentSVG: string,
   pngBuffer: Buffer,
-  spinner?: { message: (msg: string) => void }
+  spinner?: { message: (msg: string) => void; start: (msg: string) => void }
 ): Promise<string> {
   const provider = getLLMProvider();
   const base64Image = pngBuffer.toString('base64');

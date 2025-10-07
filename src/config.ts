@@ -98,7 +98,11 @@ export async function getConfig(): Promise<AppConfig> {
 
   // Prompt user if still not found
   if (!apiKey) {
-    clack.log.warn('No API key found. You can get one from: https://console.anthropic.com/settings/keys');
+    clack.log.warn('No API key found.');
+    clack.log.info('You can either:');
+    clack.log.info('  1. Set ANTHROPIC_API_KEY environment variable');
+    clack.log.info('  2. Enter it below (will be saved to ~/.config/svg-saul/config.json)');
+    clack.log.info('  Get your API key from: https://console.anthropic.com/settings/keys');
     apiKey = await promptForApiKey();
 
     // Save to config for future use
