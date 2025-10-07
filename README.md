@@ -5,6 +5,10 @@ A command-line tool that generates SVG images from natural language descriptions
 ## Demo
 
 
+https://github.com/user-attachments/assets/fbcd3979-77f3-4a51-a3eb-0c274be1d93d
+
+
+
 ## Usage
 
 To get started run the tool using npx:
