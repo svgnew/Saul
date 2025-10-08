@@ -11,7 +11,7 @@ https://github.com/user-attachments/assets/fbcd3979-77f3-4a51-a3eb-0c274be1d93d
 
 ## Examples
 
-|   |   |   |
+| a book with sparkles | a house | a pelican riding a bike |
 |---|---|---|
 |![book-with-sparkles](https://github.com/user-attachments/assets/0107f04a-7925-49ef-9d0a-3b36c7ce4679)|![house-exterior-view](https://github.com/user-attachments/assets/a98f4734-5482-47e4-adec-d4fda430d6d5)|![pelican-riding-bike](https://github.com/user-attachments/assets/515fe4cf-29a8-4f4e-acb9-1f20ae516ace)|
 
